@@ -13,7 +13,7 @@ export default function About() {
         <div className="flex justify-center">
           <div className="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden shadow-lg border-4 border-blue-600 dark:border-blue-400">
             <Image
-              src="/images/profile.jpg" // Pastikan ada file /public/profile.jpg
+              src="/images/profile.jpg" 
               alt="Afif Fakhri"
               fill
               className="object-cover"
@@ -25,10 +25,10 @@ export default function About() {
         <div>
           <h2 className="text-3xl sm:text-4xl font-semibold mb-4">About Me</h2>
           <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-            I'm a passionate web and mobile developer with a strong focus on building fast,
+            I&apos;m a passionate web and mobile developer with a strong focus on building fast,
             responsive, and accessible user interfaces. I specialize in front-end development using
             modern frameworks like <strong>Next.js</strong> and <strong>React</strong>, and I enjoy
-            transforming ideas into impactful digital experiences. I'm always eager to learn new
+            transforming ideas into impactful digital experiences. I&apos;m always eager to learn new
             technologies, explore creative solutions, and contribute to meaningful projects.
           </p>
         </div>
