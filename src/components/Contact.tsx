@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Github, Linkedin } from "lucide-react";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -10,72 +9,82 @@ export default function Contact() {
     message: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData); // ← bisa diganti kirim ke API
-    alert("Pesan berhasil dikirim (simulasi)");
+    console.log(formData); // You can replace this with your API endpoint
+    alert("Your message has been sent! (simulation)");
   };
 
   return (
     <section
       id="contact"
-      className="py-20 px-4 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100"
+      className="py-20 px-4 bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100"
     >
-      <div className="max-w-xl mx-auto text-center">
-        <h2 className="text-3xl sm:text-4xl font-semibold mb-6">Hubungi Saya</h2>
-        <p className="text-lg mb-6">Kirim pesan langsung melalui form berikut:</p>
+      <div className="max-w-2xl mx-auto text-center">
+        <h2 className="text-3xl sm:text-4xl font-semibold mb-4">Contact Me</h2>
+        <p className="text-lg mb-8 text-gray-600 dark:text-gray-300">
+          If you have a question, collaboration idea, or just want to say hello — feel free to send me a message!
+        </p>
 
-        <form onSubmit={handleSubmit} className="text-left space-y-4">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white dark:bg-gray-800 rounded-xl shadow p-6 space-y-4 text-left"
+        >
           <div>
-            <label className="block mb-1" htmlFor="name">Nama</label>
+            <label className="block text-sm font-medium mb-1" htmlFor="name">
+              Your Name
+            </label>
             <input
               type="text"
               id="name"
               name="name"
               required
               onChange={handleChange}
-              className="w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100"
+              className="w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
+
           <div>
-            <label className="block mb-1" htmlFor="email">Email</label>
+            <label className="block text-sm font-medium mb-1" htmlFor="email">
+              Your Email
+            </label>
             <input
               type="email"
               id="email"
               name="email"
               required
               onChange={handleChange}
-              className="w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100"
+              className="w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
+
           <div>
-            <label className="block mb-1" htmlFor="message">Pesan</label>
+            <label className="block text-sm font-medium mb-1" htmlFor="message">
+              Your Message
+            </label>
             <textarea
               id="message"
               name="message"
-              rows={4}
+              rows={5}
               required
               onChange={handleChange}
-              className="w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100"
+              className="w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
+
           <button
             type="submit"
-            className="w-full mt-4 bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition"
           >
-            Kirim
+            Send Message
           </button>
         </form>
-
-        <div className="mt-8 flex justify-center gap-6 text-blue-600 dark:text-blue-400 text-2xl">
-          <a href="mailto:afif@example.com"><Mail size={28} /></a>
-          <a href="https://github.com/username" target="_blank"><Github size={28} /></a>
-          <a href="https://linkedin.com/in/username" target="_blank"><Linkedin size={28} /></a>
-        </div>
       </div>
     </section>
   );

@@ -1,28 +1,65 @@
 "use client";
 
 import { Moon, Sun, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDarkMode } from "@/hooks/useDarkMode";
+import Image from "next/image";
 
 export default function Navbar() {
   const [isDark, setIsDark] = useDarkMode();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Tambahkan efek scroll: beri background & blur saat scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-white dark:bg-gray-900 shadow transition-colors">
+    <header
+      className={`fixed top-0 left-0 w-full z-50 border-b border-gray-500/30 transition-colors duration-300 ${
+        scrolled ? "bg-white/90 dark:bg-gray-900/80 shadow backdrop-blur" : "bg-transparent"
+      }`}
+    >
       <nav className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <h1 className="text-xl font-bold text-blue-600 dark:text-white">Afif Fakhri</h1>
+        {/* Logo Image */}
+        <div className="flex items-center">
+          <Image
+            src="/images/logo.png"
+            alt="Afif Fakhri Logo"
+            width={36}
+            height={36}
+            priority
+            className="object-contain rounded-full"
+          />
+        </div>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex gap-6 items-center text-gray-700 dark:text-gray-200 font-medium">
-          <li><a href="#about" className="hover:text-blue-600 dark:hover:text-blue-400">Tentang</a></li>
-          <li><a href="#projects" className="hover:text-blue-600 dark:hover:text-blue-400">Proyek</a></li>
-          <li><a href="#contact" className="hover:text-blue-600 dark:hover:text-blue-400">Kontak</a></li>
+        <ul className="hidden md:flex gap-8 items-center text-gray-700 dark:text-gray-200 font-medium">
+          <li>
+            <a href="#about" className="hover:text-blue-600 dark:hover:text-blue-400">
+              About
+            </a>
+          </li>
+          <li>
+            <a href="#projects" className="hover:text-blue-600 dark:hover:text-blue-400">
+              Projects
+            </a>
+          </li>
+          <li>
+            <a href="#contact" className="hover:text-blue-600 dark:hover:text-blue-400">
+              Contact
+            </a>
+          </li>
           <li>
             <button
               onClick={() => setIsDark(!isDark)}
-              className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
+              className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition"
               aria-label="Toggle Theme"
             >
               {isDark ? <Sun size={20} /> : <Moon size={20} />}
@@ -40,35 +77,73 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile Menu with Slide Animation */}
+      {/* Mobile Menu + Overlay */}
       <AnimatePresence>
         {menuOpen && (
-          <motion.div
-            key="mobile-menu"
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -20, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden bg-white dark:bg-gray-900 px-4 pb-4 pt-2 shadow"
-          >
-            <ul className="flex flex-col gap-3 text-gray-700 dark:text-gray-200 font-medium">
-              <li><a href="#about" onClick={() => setMenuOpen(false)} className="hover:text-blue-600 dark:hover:text-blue-400">Tentang</a></li>
-              <li><a href="#projects" onClick={() => setMenuOpen(false)} className="hover:text-blue-600 dark:hover:text-blue-400">Proyek</a></li>
-              <li><a href="#contact" onClick={() => setMenuOpen(false)} className="hover:text-blue-600 dark:hover:text-blue-400">Kontak</a></li>
-              <li>
-                <button
-                  onClick={() => {
-                    setIsDark(!isDark);
-                    setMenuOpen(false);
-                  }}
-                  className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded"
-                >
-                  {isDark ? <Sun size={20} /> : <Moon size={20} />}
-                  <span>{isDark ? "Mode Terang" : "Mode Gelap"}</span>
-                </button>
-              </li>
-            </ul>
-          </motion.div>
+          <>
+            {/* Blur Overlay */}
+            <motion.div
+              key="overlay"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setMenuOpen(false)}
+              className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 md:hidden"
+            />
+
+            {/* Mobile Menu Panel */}
+            <motion.div
+              key="mobile-menu"
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -20, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed top-16 left-0 w-full bg-white dark:bg-gray-900 px-4 pb-4 pt-2 shadow z-50 md:hidden"
+            >
+              <ul className="flex flex-col gap-4 text-gray-700 dark:text-gray-200 font-medium">
+                <li>
+                  <a
+                    href="#about"
+                    onClick={() => setMenuOpen(false)}
+                    className="hover:text-blue-600 dark:hover:text-blue-400"
+                  >
+                    About
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#projects"
+                    onClick={() => setMenuOpen(false)}
+                    className="hover:text-blue-600 dark:hover:text-blue-400"
+                  >
+                    Projects
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#contact"
+                    onClick={() => setMenuOpen(false)}
+                    className="hover:text-blue-600 dark:hover:text-blue-400"
+                  >
+                    Contact
+                  </a>
+                </li>
+                <li>
+                  <button
+                    onClick={() => {
+                      setIsDark(!isDark);
+                      setMenuOpen(false);
+                    }}
+                    className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded"
+                  >
+                    {isDark ? <Sun size={20} /> : <Moon size={20} />}
+                    <span>{isDark ? "Light Mode" : "Dark Mode"}</span>
+                  </button>
+                </li>
+              </ul>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </header>

@@ -1,13 +1,37 @@
 "use client";
 
+import Image from "next/image";
+
 export default function About() {
   return (
-    <section id="about" className="py-20 px-4 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100">
-      <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-3xl sm:text-4xl font-semibold mb-6">Tentang Saya</h2>
-        <p className="text-lg leading-relaxed">
-          Saya adalah seorang pengembang web yang memiliki ketertarikan tinggi dalam membangun antarmuka pengguna yang modern, cepat, dan responsif. Dengan latar belakang di pengembangan front-end dan pengalaman menggunakan framework seperti Next.js dan React, saya senang membangun proyek yang berdampak nyata dan terus belajar teknologi baru.
-        </p>
+    <section
+      id="about"
+      className="py-20 px-4 bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100"
+    >
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+        {/* Gambar / Avatar */}
+        <div className="flex justify-center">
+          <div className="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden shadow-lg border-4 border-blue-600 dark:border-blue-400">
+            <Image
+              src="/images/profile.jpg" // Pastikan ada file /public/profile.jpg
+              alt="Afif Fakhri"
+              fill
+              className="object-cover"
+            />
+          </div>
+        </div>
+
+        {/* Teks */}
+        <div>
+          <h2 className="text-3xl sm:text-4xl font-semibold mb-4">About Me</h2>
+          <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+            I'm a passionate web and mobile developer with a strong focus on building fast,
+            responsive, and accessible user interfaces. I specialize in front-end development using
+            modern frameworks like <strong>Next.js</strong> and <strong>React</strong>, and I enjoy
+            transforming ideas into impactful digital experiences. I'm always eager to learn new
+            technologies, explore creative solutions, and contribute to meaningful projects.
+          </p>
+        </div>
       </div>
     </section>
   );
