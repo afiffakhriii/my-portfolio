@@ -1,90 +1,82 @@
 "use client";
 
-import { useState } from "react";
+import { Mail, Instagram, Phone, Github, Linkedin } from "lucide-react";
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log(formData); // You can replace this with your API endpoint
-    alert("Your message has been sent! (simulation)");
-  };
-
   return (
     <section
       id="contact"
       className="py-20 px-4 bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100"
     >
-      <div className="max-w-2xl mx-auto text-center">
-        <h2 className="text-3xl sm:text-4xl font-semibold mb-4">Contact Me</h2>
-        <p className="text-lg mb-8 text-gray-600 dark:text-gray-300">
-          If you have a question, collaboration idea, or just want to say hello — feel free to send me a message!
+      <div className="max-w-4xl mx-auto text-center">
+        <h2 className="text-3xl sm:text-4xl font-semibold mb-4">Connect With Me</h2>
+        <p className="text-lg mb-12 text-gray-600 dark:text-gray-300">
+          I&apos;m always open to collaboration or just a friendly chat. Reach me through:
         </p>
 
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow p-6 space-y-4 text-left"
-        >
-          <div>
-            <label className="block text-sm font-medium mb-1" htmlFor="name">
-              Your Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              required
-              onChange={handleChange}
-              className="w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium mb-1" htmlFor="email">
-              Your Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              onChange={handleChange}
-              className="w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium mb-1" htmlFor="message">
-              Your Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              rows={5}
-              required
-              onChange={handleChange}
-              className="w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition"
+        {/* Top row: LinkedIn, GitHub, WhatsApp */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <a
+            href="https://linkedin.com/in/afifffakhri"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow hover:bg-gray-50 dark:hover:bg-gray-700 transition"
           >
-            Send Message
-          </button>
-        </form>
+            <Linkedin className="text-gray-500 dark:text-gray-400" size={24} />
+            <span className="font-medium text-gray-800 dark:text-gray-200">
+              linkedin.com/in/afifffakhri
+            </span>
+          </a>
+
+          <a
+            href="https://github.com/afiffakhriii"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow hover:bg-gray-50 dark:hover:bg-gray-700 transition"
+          >
+            <Github className="text-gray-500 dark:text-gray-400" size={24} />
+            <span className="font-medium text-gray-800 dark:text-gray-200">
+              github.com/afiffakhriii
+            </span>
+          </a>
+
+          <a
+            href="https://wa.me/6281280039510"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow hover:bg-gray-50 dark:hover:bg-gray-700 transition"
+          >
+            <Phone className="text-gray-500 dark:text-gray-400" size={24} />
+            <span className="font-medium text-gray-800 dark:text-gray-200">
+              +62 812-8003-9510
+            </span>
+          </a>
+        </div>
+
+        {/* Bottom row: Email, Instagram */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <a
+            href="mailto:afiffakhri.ofcl@gmail.com"
+            className="flex items-center justify-center gap-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow hover:bg-gray-50 dark:hover:bg-gray-700 transition"
+          >
+            <Mail className="text-gray-500 dark:text-gray-400" size={24} />
+            <span className="font-medium text-gray-800 dark:text-gray-200">
+              afiffakhri.ofcl@gmail.com
+            </span>
+          </a>
+
+          <a
+            href="https://instagram.com/afifffakhri"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow hover:bg-gray-50 dark:hover:bg-gray-700 transition"
+          >
+            <Instagram className="text-gray-500 dark:text-gray-400" size={24} />
+            <span className="font-medium text-gray-800 dark:text-gray-200">
+              @afifffakhri
+            </span>
+          </a>
+        </div>
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { Github, Linkedin, Mail } from "lucide-react";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -11,33 +11,16 @@ export default function Footer() {
           © {new Date().getFullYear()} Afif Fakhri. All rights reserved.
         </p>
 
-        {/* Social Icons */}
-        <div className="flex gap-6 justify-center">
-          <a
-            href="mailto:afiffakhri.ofcl@gmail.com"
-            className="hover:text-blue-600 dark:hover:text-blue-400 transition"
-            aria-label="Email"
-          >
-            <Mail size={22} />
-          </a>
-          <a
-            href="https://github.com/afiffakhriii"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-blue-600 dark:hover:text-blue-400 transition"
-            aria-label="GitHub"
-          >
-            <Github size={22} />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/afif-fakhri/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-blue-600 dark:hover:text-blue-400 transition"
-            aria-label="LinkedIn"
-          >
-            <Linkedin size={22} />
-          </a>
+        {/* Logo */}
+        <div className="flex items-center">
+          <Image
+            src="/images/logo.png"
+            alt="Afif Fakhri Logo"
+            width={36}
+            height={36}
+            priority
+            className="object-contain rounded-full"
+          />
         </div>
       </div>
     </footer>
