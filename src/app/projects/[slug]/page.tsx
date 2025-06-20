@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import { Leaf, BookOpen, Glasses } from "lucide-react";
+import type { ReactNode } from "react";
 
+// Tipe Project tanpa ReactNode untuk icon
 type Project = {
   slug: string;
   title: string;
@@ -8,10 +10,8 @@ type Project = {
   details: string[];
   tech: string[];
   github: string;
-  icon: React.ReactNode;
 };
 
-// Data project konsisten dengan Projects.tsx
 const projects: Project[] = [
   {
     slug: "plantme",
@@ -26,7 +26,6 @@ const projects: Project[] = [
     tech: ["Kotlin", "CNN", "Firebase", "Android"],
     github:
       "https://github.com/afiffakhriii/Plantme-Aplikasi-Mobile-Identifikasi-Tanaman-Hias-Menggunakan-Algoritma-Convolutional-Neural-Network",
-    icon: <Leaf size={40} className="text-blue-600 dark:text-blue-400" />,
   },
   {
     slug: "kanami",
@@ -40,7 +39,6 @@ const projects: Project[] = [
     ],
     tech: ["Unity", "C#", "2D Game", "UI/UX"],
     github: "https://github.com/afiffakhriii/Kanami",
-    icon: <BookOpen size={40} className="text-blue-600 dark:text-blue-400" />,
   },
   {
     slug: "optix",
@@ -54,20 +52,32 @@ const projects: Project[] = [
     ],
     tech: ["Kotlin", "Jetpack Compose", "Android"],
     github: "https://github.com/Optix-Project/OPTIX",
-    icon: <Glasses size={40} className="text-blue-600 dark:text-blue-400" />,
   },
 ];
 
+// Fungsi untuk memilih ikon berdasarkan slug
+const getProjectIcon = (slug: string): ReactNode => {
+  switch (slug) {
+    case "plantme":
+      return <Leaf size={40} className="text-blue-600 dark:text-blue-400" />;
+    case "kanami":
+      return <BookOpen size={40} className="text-blue-600 dark:text-blue-400" />;
+    case "optix":
+      return <Glasses size={40} className="text-blue-600 dark:text-blue-400" />;
+    default:
+      return null;
+  }
+};
+
 export default function ProjectDetail({ params }: { params: { slug: string } }) {
   const project = projects.find((p) => p.slug === params.slug);
-
   if (!project) return notFound();
 
   return (
     <div className="min-h-screen px-4 py-20 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100">
       <div className="max-w-3xl mx-auto space-y-8">
         <div className="flex items-center gap-4">
-          {project.icon}
+          {getProjectIcon(project.slug)}
           <h1 className="text-3xl sm:text-4xl font-bold">{project.title}</h1>
         </div>
 
@@ -110,4 +120,3 @@ export async function generateStaticParams() {
     slug: project.slug,
   }));
 }
-
