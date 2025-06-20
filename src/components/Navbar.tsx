@@ -1,13 +1,11 @@
 "use client";
 
-import { Moon, Sun, Menu, X } from "lucide-react";
+import {  Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useDarkMode } from "@/hooks/useDarkMode";
 import Image from "next/image";
 
 export default function Navbar() {
-  const [isDark, setIsDark] = useDarkMode();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -32,8 +30,8 @@ export default function Navbar() {
           <Image
             src="/images/logo.png"
             alt="Afif Fakhri Logo"
-            width={36}
-            height={36}
+            width={42}
+            height={42}
             priority
             className="object-contain rounded-full"
           />
@@ -57,13 +55,6 @@ export default function Navbar() {
             </a>
           </li>
           <li>
-            <button
-              onClick={() => setIsDark(!isDark)}
-              className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition"
-              aria-label="Toggle Theme"
-            >
-              {isDark ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
           </li>
         </ul>
 
@@ -128,18 +119,6 @@ export default function Navbar() {
                   >
                     Contact
                   </a>
-                </li>
-                <li>
-                  <button
-                    onClick={() => {
-                      setIsDark(!isDark);
-                      setMenuOpen(false);
-                    }}
-                    className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded"
-                  >
-                    {isDark ? <Sun size={20} /> : <Moon size={20} />}
-                    <span>{isDark ? "Light Mode" : "Dark Mode"}</span>
-                  </button>
                 </li>
               </ul>
             </motion.div>

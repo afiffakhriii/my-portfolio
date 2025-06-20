@@ -16,8 +16,8 @@ export default function Footer() {
           <Image
             src="/images/logo.png"
             alt="Afif Fakhri Logo"
-            width={36}
-            height={36}
+            width={42}
+            height={42}
             priority
             className="object-contain rounded-full"
           />

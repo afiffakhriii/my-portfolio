@@ -12,11 +12,16 @@ export default function FadeInWhenVisible({
   delay?: number;
 }) {
   const controls = useAnimation();
-  const [ref, inView] = useInView({ triggerOnce: true });
+
+  // triggerOnce: false supaya animasi bisa aktif ulang saat elemen kembali terlihat saat scroll
+  const [ref, inView] = useInView({ triggerOnce: false, threshold: 0.1 });
 
   useEffect(() => {
     if (inView) {
       controls.start("visible");
+    } else {
+      // Saat elemen hilang dari viewport, animasi kembali ke state hidden
+      controls.start("hidden");
     }
   }, [controls, inView]);
 

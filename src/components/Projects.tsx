@@ -14,7 +14,6 @@ type Project = {
   github: string;
 };
 
-
 const projects: Project[] = [
   {
     title: "PlantMe Ornamental Plant Identification App",
@@ -38,7 +37,7 @@ const projects: Project[] = [
     title: "OPTIX Virtual Try-On Glasses App",
     description:
       "A Kotlin-based Android app that lets users virtually try on glasses using camera overlays and face tracking technology.",
-    tech: ["Kotlin", "CameraX", "ML Kit", "Android"],
+    tech: ["Kotlin", "Jetpack Compose", "Android"],
     slug: "optix",
     icon: Glasses,
     github: "https://github.com/Optix-Project/OPTIX",
@@ -59,9 +58,12 @@ export default function Projects() {
           {projects.map((project, index) => (
             <FadeInWhenVisible key={index} delay={index * 0.2}>
               <div className="bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition flex flex-col">
-                  <div className="flex justify-center items-center py-4">
-                    <project.icon size={48} className="text-blue-600 dark:text-blue-400" />
-                  </div>
+                <div className="flex justify-center items-center py-4">
+                  <project.icon
+                    size={48}
+                    className="text-blue-600 dark:text-blue-400"
+                  />
+                </div>
                 <div className="p-6 flex flex-col gap-4 flex-1">
                   <div>
                     <h3 className="text-xl font-bold mb-1">{project.title}</h3>
@@ -79,10 +81,10 @@ export default function Projects() {
                       </span>
                     ))}
                   </div>
-                  <div className="flex gap-3 mt-2">
+                  <div className="grid grid-cols-2 gap-3 mt-2">
                     <Link
                       href={`/projects/${project.slug}`}
-                      className="text-sm bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+                      className="text-sm bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition text-center w-full"
                     >
                       View Project
                     </Link>
@@ -90,7 +92,7 @@ export default function Projects() {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm border border-blue-600 text-blue-600 px-4 py-2 rounded hover:bg-blue-50 dark:hover:bg-blue-950 transition"
+                      className="text-sm border border-blue-600 text-blue-600 py-2 rounded hover:bg-blue-50 dark:hover:bg-blue-950 transition text-center w-full"
                     >
                       Source Code
                     </a>
