@@ -1,15 +1,18 @@
 "use client";
 
-import {  Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
-  // Tambahkan efek scroll: beri background & blur saat scroll
+  // Tambahkan efek scroll
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -17,6 +20,13 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Cek apakah di homepage
+  const isHome = pathname === "/";
+
+  // Jika di homepage, gunakan anchor lokal
+  // Jika tidak, gunakan link ke "/#section"
+  const link = (id: string) => (isHome ? `#${id}` : `/#${id}`);
 
   return (
     <header
@@ -27,35 +37,30 @@ export default function Navbar() {
       <nav className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo Image */}
         <div className="flex items-center">
-          <Image
-            src="/images/logo.png"
-            alt="Afif Fakhri Logo"
-            width={42}
-            height={42}
-            priority
-            className="object-contain rounded-full"
-          />
+          <Link href="/">
+            <Image
+              src="/images/logo.png"
+              alt="Afif Fakhri Logo"
+              width={42}
+              height={42}
+              priority
+              className="object-contain rounded-full"
+            />
+          </Link>
         </div>
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex gap-8 items-center text-gray-700 dark:text-gray-200 font-medium">
-          <li>
-            <a href="#about" className="hover:text-blue-600 dark:hover:text-blue-400">
-              About
-            </a>
-          </li>
-          <li>
-            <a href="#projects" className="hover:text-blue-600 dark:hover:text-blue-400">
-              Projects
-            </a>
-          </li>
-          <li>
-            <a href="#contact" className="hover:text-blue-600 dark:hover:text-blue-400">
-              Contact
-            </a>
-          </li>
-          <li>
-          </li>
+          {["about", "projects", "contact"].map((id) => (
+            <li key={id}>
+              <Link
+                href={link(id)}
+                className="hover:text-blue-600 dark:hover:text-blue-400"
+              >
+                {id.charAt(0).toUpperCase() + id.slice(1)}
+              </Link>
+            </li>
+          ))}
         </ul>
 
         {/* Mobile Toggle Button */}
@@ -72,7 +77,6 @@ export default function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <>
-            {/* Blur Overlay */}
             <motion.div
               key="overlay"
               initial={{ opacity: 0 }}
@@ -83,7 +87,6 @@ export default function Navbar() {
               className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 md:hidden"
             />
 
-            {/* Mobile Menu Panel */}
             <motion.div
               key="mobile-menu"
               initial={{ y: -20, opacity: 0 }}
@@ -93,33 +96,17 @@ export default function Navbar() {
               className="fixed top-16 left-0 w-full bg-white dark:bg-gray-900 px-4 pb-4 pt-2 shadow z-50 md:hidden"
             >
               <ul className="flex flex-col gap-4 text-gray-700 dark:text-gray-200 font-medium">
-                <li>
-                  <a
-                    href="#about"
-                    onClick={() => setMenuOpen(false)}
-                    className="hover:text-blue-600 dark:hover:text-blue-400"
-                  >
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#projects"
-                    onClick={() => setMenuOpen(false)}
-                    className="hover:text-blue-600 dark:hover:text-blue-400"
-                  >
-                    Projects
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#contact"
-                    onClick={() => setMenuOpen(false)}
-                    className="hover:text-blue-600 dark:hover:text-blue-400"
-                  >
-                    Contact
-                  </a>
-                </li>
+                {["about", "projects", "contact"].map((id) => (
+                  <li key={id}>
+                    <Link
+                      href={link(id)}
+                      onClick={() => setMenuOpen(false)}
+                      className="hover:text-blue-600 dark:hover:text-blue-400"
+                    >
+                      {id.charAt(0).toUpperCase() + id.slice(1)}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </motion.div>
           </>

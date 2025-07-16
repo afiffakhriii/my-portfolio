@@ -1,122 +1,106 @@
 import { notFound } from "next/navigation";
-import { Leaf, BookOpen, Glasses } from "lucide-react";
-import type { ReactNode } from "react";
+import ProjectHero from "@/components/ProjectHero";
+import ProjectGallery from "@/components/ProjectGallery";
 
-// Tipe Project tanpa ReactNode untuk icon
 type Project = {
   slug: string;
   title: string;
   description: string;
-  details: string[];
   tech: string[];
+  images: {
+    src: string;
+    caption: string;
+  }[];
   github: string;
 };
 
 const projects: Project[] = [
   {
     slug: "plantme",
-    title: "PlantMe Ornamental Plant Identification App",
+    title: "PlantMe",
     description:
-      "A deep learning based mobile app to classify 10 ornamental plant species and provide care guidance using CNN model.",
-    details: [
-      "Built using Kotlin for native Android development.",
-      "Trained CNN model to recognize 10 ornamental plant classes.",
-      "Integrated Firebase for authentication and cloud data storage.",
+      "AI-powered mobile app for identifying ornamental plants using CNN.",
+    tech: ["Kotlin", "TensorFlow Lite", "Firebase"],
+    images: [
+      {
+        src: "/images/plantme1.png",
+        caption: "Halaman pembuka aplikasi PlantMe yang memperkenalkan fitur utama.",
+      },
+      {
+        src: "/images/plantme2.png",
+        caption: "Ambil gambar tanaman untuk identifikasi otomatis oleh AI.",
+      },
+      {
+        src: "/images/plantme3.png",
+        caption: "Tampilan hasil identifikasi dan informasi detail tanaman.",
+      },
+      {
+        src: "/images/plantme4.png",
+        caption: "Tips perawatan tanaman hias yang disesuaikan dengan jenisnya.",
+      },
     ],
-    tech: ["Kotlin", "CNN", "Firebase", "Android"],
-    github:
-      "https://github.com/afiffakhriii/Plantme-Aplikasi-Mobile-Identifikasi-Tanaman-Hias-Menggunakan-Algoritma-Convolutional-Neural-Network",
+    github: "https://github.com/afiffakhriii/plantme",
   },
   {
     slug: "kanami",
-    title: "Kanami Japanese Letter Learning App",
+    title: "Kanami",
     description:
-      "An educational mobile game built with Unity to help users learn Hiragana and Katakana through interactive quizzes and animations.",
-    details: [
-      "Developed in Unity using C# and 2D game assets.",
-      "Included 25 quizzes and fun animations to support memorization.",
-      "Optimized for user-friendly UI/UX and touch interaction.",
+      "Game edukasi belajar huruf Jepang (Hiragana & Katakana) dengan Unity.",
+    tech: ["Unity", "C#", "2D Game"],
+    images: [
+      {
+        src: "/images/kanami1.png",
+        caption: "Tampilan awal game Kanami dengan antarmuka interaktif.",
+      },
+      {
+        src: "/images/kanami2.png",
+        caption: "Pilihan mode permainan untuk belajar Hiragana & Katakana.",
+      },
+      {
+        src: "/images/kanami3.png",
+        caption: "Contoh soal dengan ilustrasi karakter Jepang.",
+      },
+      {
+        src: "/images/kanami4.png",
+        caption: "Halaman skor dan pencapaian pengguna setelah menyelesaikan soal.",
+      },
     ],
-    tech: ["Unity", "C#", "2D Game", "UI/UX"],
     github: "https://github.com/afiffakhriii/Kanami",
   },
-  {
-    slug: "optix",
-    title: "OPTIX Virtual Try-On Glasses App",
-    description:
-      "A Kotlin-based Android app that lets users virtually try on glasses using camera overlays and face tracking technology.",
-    details: [
-      "Built with Jetpack Compose and CameraX for live preview.",
-      "Overlays glasses models onto user’s face in real-time.",
-      "Designed intuitive interface and smooth UX animations.",
-    ],
-    tech: ["Kotlin", "Jetpack Compose", "Android"],
-    github: "https://github.com/Optix-Project/OPTIX",
-  },
 ];
-
-// Fungsi untuk memilih ikon berdasarkan slug
-const getProjectIcon = (slug: string): ReactNode => {
-  switch (slug) {
-    case "plantme":
-      return <Leaf size={40} className="text-blue-600 dark:text-blue-400" />;
-    case "kanami":
-      return <BookOpen size={40} className="text-blue-600 dark:text-blue-400" />;
-    case "optix":
-      return <Glasses size={40} className="text-blue-600 dark:text-blue-400" />;
-    default:
-      return null;
-  }
-};
-
-export default function ProjectDetail({ params }: { params: { slug: string } }) {
-  const project = projects.find((p) => p.slug === params.slug);
-  if (!project) return notFound();
-
-  return (
-    <div className="min-h-screen px-4 py-20 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100">
-      <div className="max-w-3xl mx-auto space-y-8">
-        <div className="flex items-center gap-4">
-          {getProjectIcon(project.slug)}
-          <h1 className="text-3xl sm:text-4xl font-bold">{project.title}</h1>
-        </div>
-
-        <p className="text-lg text-gray-600 dark:text-gray-300">{project.description}</p>
-
-        <ul className="list-disc list-inside space-y-2 text-base pl-4">
-          {project.details.map((point, i) => (
-            <li key={i}>{point}</li>
-          ))}
-        </ul>
-
-        <div className="flex flex-wrap gap-2">
-          {project.tech.map((tech, i) => (
-            <span
-              key={i}
-              className="bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-100 px-3 py-1 rounded-full text-sm"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-
-        <div className="pt-4">
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 dark:text-blue-400 hover:underline"
-          >
-            🔗 View Source Code
-          </a>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export async function generateStaticParams() {
   return projects.map((project) => ({
     slug: project.slug,
   }));
+}
+
+export default function ProjectDetail({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const project = projects.find((p) => p.slug === params.slug);
+  if (!project) return notFound();
+
+  return (
+    <div className="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100">
+      {/* Fullscreen Hero */}
+      <ProjectHero
+        title={project.title}
+        description={project.description}
+        tech={project.tech}
+        image={project.images[0].src}
+        github={project.github}
+      />
+
+      {/* Image Gallery with Descriptions */}
+      <section
+        id="screenshots"
+          className="max-w-screen-xl mx-auto px-4 sm:px-8 pb-24 mt-32"
+      >
+        <ProjectGallery images={project.images} alt={project.title} />
+      </section>
+    </div>
+  );
 }
