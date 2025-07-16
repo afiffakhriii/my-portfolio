@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Tambahkan konfigurasi Next.js di sini
+  output: "export", // Penting untuk export statis
 };
 
 export default nextConfig;
