@@ -18,8 +18,7 @@ const projects: Project[] = [
   {
     slug: "plantme",
     title: "PlantMe",
-    description:
-      "AI-powered mobile app for identifying ornamental plants using CNN.",
+    description: "AI-powered mobile app for identifying ornamental plants using CNN.",
     tech: ["Kotlin", "TensorFlow Lite", "Firebase"],
     images: [
       {
@@ -44,8 +43,7 @@ const projects: Project[] = [
   {
     slug: "kanami",
     title: "Kanami",
-    description:
-      "Game edukasi belajar huruf Jepang (Hiragana & Katakana) dengan Unity.",
+    description: "Game edukasi belajar huruf Jepang (Hiragana & Katakana) dengan Unity.",
     tech: ["Unity", "C#", "2D Game"],
     images: [
       {
@@ -75,12 +73,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function ProjectDetail({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default function Page({ params }: { params: { slug: string } }) {
   const project = projects.find((p) => p.slug === params.slug);
+
   if (!project) return notFound();
 
   return (
@@ -97,7 +92,7 @@ export default function ProjectDetail({
       {/* Image Gallery with Descriptions */}
       <section
         id="screenshots"
-          className="max-w-screen-xl mx-auto px-4 sm:px-8 pb-24 mt-32"
+        className="max-w-screen-xl mx-auto px-4 sm:px-8 pb-24 mt-32"
       >
         <ProjectGallery images={project.images} alt={project.title} />
       </section>
