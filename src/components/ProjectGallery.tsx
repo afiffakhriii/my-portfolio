@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import Image from "next/image";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 interface Props {
   images: {
@@ -17,6 +19,9 @@ export default function ProjectGallery({ images, alt }: Props) {
   const [active, setActive] = useState(0);
   const [direction, setDirection] = useState<"left" | "right">("right");
 
+  const [refLeft, inViewLeft] = useInView({ triggerOnce: false });
+  const [refRight, inViewRight] = useInView({ triggerOnce: false });
+
   const next = () => {
     setDirection("right");
     setActive((prev) => (prev + 1) % images.length);
@@ -27,7 +32,7 @@ export default function ProjectGallery({ images, alt }: Props) {
     setActive((prev) => (prev - 1 + images.length) % images.length);
   };
 
-  const variants = {
+  const imageVariants:any = {
     enter: (dir: "left" | "right") => ({
       x: dir === "right" ? 100 : -100,
       opacity: 0,
@@ -35,46 +40,47 @@ export default function ProjectGallery({ images, alt }: Props) {
     center: {
       x: 0,
       opacity: 1,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-      },
+      transition: { duration: 0.5, ease: "easeOut" },
     },
     exit: (dir: "left" | "right") => ({
       x: dir === "right" ? -100 : 100,
       opacity: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeIn",
-      },
+      transition: { duration: 0.5, ease: "easeIn" },
     }),
   };
 
+  const leftColumnVariants :any = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+
+  const rightColumnVariants:any = {
+    hidden: { opacity: 0, x: 100 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+
   return (
-    <div className="grid md:grid-cols-2 gap-24 items-center py-24">
+    <div className="grid md:grid-cols-2 gap-16 items-center">
       {/* Kiri: Deskripsi dan Thumbnail */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: false, amount: 0.5 }}
-        transition={{ duration: 0.6 }}
-        className="flex flex-col"
+        ref={refLeft}
+        variants={leftColumnVariants}
+        initial="hidden"
+        animate={inViewLeft ? "visible" : "hidden"}
       >
-        <div className="mb-6">
-          <p className="text-gray-600 dark:text-gray-300">
-            {images[active].caption}
-          </p>
-        </div>
-
+        <p className="mb-6 text-gray-600 dark:text-gray-300">{images[active].caption}</p>
         <div className="flex items-center gap-4">
-          <button
-            onClick={prev}
-            className="text-gray-500 hover:text-blue-500"
-            aria-label="Previous"
-          >
+          <button onClick={prev} className="text-gray-500 hover:text-blue-500" aria-label="Previous">
             <ChevronLeft size={28} />
           </button>
-
           <div className="flex gap-2 overflow-x-auto no-scrollbar">
             {images.map((img, i) => (
               <button
@@ -97,30 +103,25 @@ export default function ProjectGallery({ images, alt }: Props) {
               </button>
             ))}
           </div>
-
-          <button
-            onClick={next}
-            className="text-gray-500 hover:text-blue-500"
-            aria-label="Next"
-          >
+          <button onClick={next} className="text-gray-500 hover:text-blue-500" aria-label="Next">
             <ChevronRight size={28} />
           </button>
         </div>
       </motion.div>
 
-      {/* Kanan: Gambar besar dengan animasi saat muncul dan saat pindah */}
+      {/* Kanan: Gambar besar */}
       <motion.div
-        initial={{ opacity: 0, x: 100 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: false, amount: 0.5 }}
-        transition={{ duration: 0.6 }}
-        className="flex justify-center items-center min-h-[400px] relative"
+        ref={refRight}
+        variants={rightColumnVariants}
+        initial="hidden"
+        animate={inViewRight ? "visible" : "hidden"}
+        className="relative flex justify-center items-center min-h-[300px]"
       >
         <AnimatePresence custom={direction} mode="wait" initial={false}>
           <motion.div
             key={images[active].src}
             custom={direction}
-            variants={variants}
+            variants={imageVariants}
             initial="enter"
             animate="center"
             exit="exit"
