@@ -18,7 +18,7 @@ const projects: any= [
       { src: "/images/plantme4.png", caption: "The Scan Page of the Plantme app allows users to identify plants quickly and easily using images. Users can upload a plant photo either by taking a new picture or selecting one from their gallery. Once the image is uploaded, the app analyzes it and displays the identification result, such as the plant name “Keladi.” A button to view detailed care tips is also provided after identification. The step-by-step flow at the top guides users through the process, making it simple and intuitive to recognize plants and learn how to care for them." },
       { src: "/images/plantme5.png", caption: "The Plant Detail Page in the Plantme app provides users with comprehensive information about a specific plant, such as Keladi. It includes a clear plant image, a short description, and a section called Tips Perawatan (Care Tips) that covers key care aspects like sunlight needs, watering frequency, and recommended fertilizers. Each tip is presented with intuitive icons for better readability. At the bottom, users are also shown suggestions for other plants they might be interested in, encouraging further exploration. The layout is clean and informative, helping users care for their plants more effectively." },
     ],
-    github: "https://github.com/afiffakhriii/plantme",
+    github: "https://github.com/afiffakhriii/Plantme-Aplikasi-Mobile-Identifikasi-Tanaman-Hias-Menggunakan-Algoritma-Convolutional-Neural-Network",
   },
   {
     slug: "kanami",
@@ -47,7 +47,7 @@ const projects: any= [
       { src: "/images/optix_home.png", caption: "The home page of the Optix app features a clean and modern layout designed to enhance the shopping experience. At the top, there is a search bar for quickly finding specific eyeglass models, along with a notification icon to keep users updated on offers or order status. Below, a scrollable list displays various eyeglasses with images and brief details, allowing users to browse easily. At the bottom of the screen, a navigation bar provides quick access to key sections of the app, including Home, Wishlist, History, and Profile, ensuring smooth and intuitive navigation throughout the platform." },
       { src: "/images/optix_try.png", caption: "The try-on page in the Optix app allows users to virtually try on eyeglasses using their phone's camera and Augmented Reality (AR) technology. When accessed, the camera activates and overlays selected glasses onto the user’s face in real time, giving a realistic preview of how each model would look when worn. This immersive feature helps users find the perfect fit and style without visiting a physical store, making the shopping experience both convenient and personalized." },
     ],
-    github: "https://github.com/Optix-Project/OPTIX",
+    github: "https://github.com/yodhanabiha/Optix_App",
   },
     {
     slug: "sakuraKaigoshisetsu",
@@ -61,7 +61,7 @@ const projects: any= [
       { src: "/images/obat.png", caption: "The 'Obat-obatan' page introduces users to various types of medicine commonly encountered in caregiving settings, with each item labeled in Japanese, Indonesian, and illustrated with a simple image. Medicines such as 'obat masuk angin' (cold medicine), 'obat mata' (eye drops), and 'obat batuk' (cough syrup) are presented alongside their corresponding Japanese terms like かぜぐすり (kazegusuri) and めぐすり (megusuri). The visual layout is clean and easy to navigate, helping learners visually associate vocabulary with real-world items. Navigation buttons at the bottom allow users to move between sections, supporting smooth interaction throughout the app." },
       { src: "/images/kuis.png", caption: "This practice page, labeled 'れんしゅう' (renshū) which means 'exercise' or 'practice' in Japanese, is designed to test the user's understanding of vocabulary related to different rooms. At the center of the screen is an image of a bedroom, and beneath it are four colorful answer choices written in hiragana and katakana: しんさつしつ (examination room), へや (room/bedroom), いま (living room), and よくしつ (bathroom). Users are expected to select the correct Japanese term that matches the image shown. The interface is visually simple and intuitive, helping learners reinforce their vocabulary through visual association and active recall." },
     ],
-    github: "https://github.com/Optix-Project/OPTIX",
+    github: "https://github.com/afiffakhriii/SakuraKaigoshisetsu",
   },
   
 ];

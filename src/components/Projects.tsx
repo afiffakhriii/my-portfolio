@@ -41,7 +41,7 @@ const projects: Project[] = [
     tech: ["Kotlin", "Jetpack Compose", "Android"],
     slug: "optix",
     icon: Glasses,
-    github: "https://github.com/Optix-Project/OPTIX",
+    github: "https://github.com/yodhanabiha/Optix_App",
   },
   {
     title: "Sakura Kaigoshisetsu Japanese Learning App For Nursing",
