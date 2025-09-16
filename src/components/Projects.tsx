@@ -22,7 +22,8 @@ const projects: Project[] = [
     tech: ["Kotlin", "CNN", "Firebase", "Android"],
     slug: "plantme",
     icon: Leaf,
-    github: "https://github.com/afiffakhriii/Plantme-Aplikasi-Mobile-Identifikasi-Tanaman-Hias-Menggunakan-Algoritma-Convolutional-Neural-Network",
+    github:
+      "https://github.com/afiffakhriii/Plantme-Aplikasi-Mobile-Identifikasi-Tanaman-Hias-Menggunakan-Algoritma-Convolutional-Neural-Network",
   },
   {
     title: "Kanami Japanese Letter Learning App",
@@ -64,8 +65,11 @@ export default function Projects() {
   }
 
   const getColStartClass = (count: number, index: number) => {
-    if (count === 1) return "col-start-2"; // Center
-    if (count === 2) return index === 0 ? "col-start-1" : "col-start-2"; // Left & Center
+    if (count === 1) return "md:col-start-1 xl:col-start-2"; // Center on xl
+    if (count === 2)
+      return index === 0
+        ? "md:col-start-1"
+        : "md:col-start-2 xl:col-start-2"; // Left & Center
     return ""; // Default for 3 items
   };
 
@@ -79,7 +83,7 @@ export default function Projects() {
           My Projects
         </h2>
 
-        {/* First row always 3 items */}
+        {/* First row always 3 items (responsive) */}
         <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-3">
           {firstRowProjects.map((project, index) => (
             <FadeInWhenVisible key={index} delay={index * 0.2}>
@@ -88,11 +92,11 @@ export default function Projects() {
           ))}
         </div>
 
-        {/* Subsequent rows in chunks */}
+        {/* Subsequent rows in chunks (same responsiveness) */}
         {chunkedProjects.map((group, rowIdx) => (
           <div
             key={rowIdx}
-            className="mt-12 grid gap-10 grid-cols-3 justify-center"
+            className="mt-12 grid gap-10 md:grid-cols-2 xl:grid-cols-3 justify-center"
           >
             {group.map((project, index) => (
               <div
